@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from custom_pages.views import (
     home_page,
@@ -7,6 +7,8 @@ from custom_pages.views import (
     price_page,
     contact_page,
     testimonials_page,
+    # APIs
+    service_api,
 )
 
 urlpatterns = [
@@ -16,4 +18,9 @@ urlpatterns = [
     path("price",price_page,name="price-page"),
     path("contact",contact_page,name="contact"),
     path("testimonials",testimonials_page,name="testimonials"),
+    # APIs
+    path("api/",include([
+        path("services/",service_api,name="service-api"),
+        # ....
+    ])),
 ]

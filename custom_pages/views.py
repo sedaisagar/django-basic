@@ -55,6 +55,9 @@ def about_page(request):
     # 
     # 
         # Data Processing here
+    
+    doctors = Doctors.objects.filter(published=True).order_by("-priority")
+    context["objects"] = doctors
     # ...
     # 
     return render(request,"about.html", context)
@@ -98,3 +101,13 @@ def testimonials_page(request):
     # 
     return render(request,"testimonial.html", context)
     
+
+# JSON Response End Point View
+
+from django.http import JsonResponse
+def service_api(*args):
+    services = Services.objects.filter(published=True).order_by("-priority").values()
+    # services = [i for i in services]
+    
+    data = list(services)
+    return JsonResponse(data,safe=False)
