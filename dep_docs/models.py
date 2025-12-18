@@ -24,7 +24,8 @@ class Doctors(CommonModel):
     # priority = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.name
+        app_counts = self.appointments.all().count()
+        return f"{self.name} - Appointments ({app_counts})"
 
     class Meta:
         db_table = "doctors"
