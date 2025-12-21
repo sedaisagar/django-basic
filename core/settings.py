@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'services',
     'dep_docs',
     'contacts',
+    'pricings',
     # third party apps
     'crispy_forms',
     "crispy_bootstrap5",

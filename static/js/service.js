@@ -12,6 +12,12 @@ document.addEventListener( "DOMContentLoaded", () => {
 
             $( "#services-container" ).html( '' )
 
+            // document.getElementById()
+            // $( "#services-container" )
+
+            // document.getElementsByClassName()
+            // $( ".services-container" )
+
             // now i have data
             r?.forEach( res => {
                 var cont = `
