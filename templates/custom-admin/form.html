@@ -18,6 +18,15 @@
         <form action="" method="post">
             {% csrf_token %}
             {{form|crispy}}
+            
+
+            
+            {% if pricing_form and formset %}
+            {{pricing_form|crispy}}
+            <h1 class="my-5">Pricing Features</h1>
+            {{formset|crispy}}
+            {% endif %}
+
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
