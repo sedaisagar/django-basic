@@ -8,7 +8,7 @@ from django.contrib import messages
 
 # / -> View -> accepts request -> processes the request -> returns response
 
-
+# @something
 def home_page(request):
 
     if request.method == "POST":
