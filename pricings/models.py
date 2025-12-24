@@ -17,3 +17,5 @@ class Features(CommonModel):
 
     class Meta:
         db_table = "pricing_features"
+
+# Eager, Lazy

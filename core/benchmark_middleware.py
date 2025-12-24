@@ -24,7 +24,7 @@ def benchmark(get_response):
         # Get ending stats
         end_time = time.perf_counter()
         end_queries = len(connection.queries)
-
+        
         # Calculate stats
         total_time = end_time - start_time
         total_queries = end_queries - start_queries
@@ -38,8 +38,11 @@ def benchmark(get_response):
             total_queries,
             "Total time",
             total_time,
-            "<<<<<<<<<<",
+            "<<<<<<<<<<\n",
         )
+        
+        # for i in connection.queries:
+        #     print(i, "\n")
         
         return response
 

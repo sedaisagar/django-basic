@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
 from pricings.forms import FeaturesInlineFormSet, OurPricingForm
-from pricings.models import OurPricings
+from pricings.models import Features, OurPricings
 from django.urls import reverse_lazy, reverse
-
+from django.db.models import Count, Case,Q,F
 
 class PricingUtils:
     def pricing_create_or_update(self, request, pk=None):
@@ -54,9 +54,28 @@ class PricingList(generic.ListView):
     # template_name
 
     # model = OurPricings
-    queryset = OurPricings.objects.all().order_by("-priority")
-    template_name = "custom-admin/pricings.html"
+    queryset = OurPricings.objects.prefetch_related(
+        'features').annotate(
+            published_features_count=Count('features',filter=Q(features__published=True)),
+            all_features_count=Count('features'),
+        ).all().order_by("-priority")
 
+    # queryset = OurPricings.objects.all().order_by("-priority")
+    template_name = "custom-admin/pricings.html"
+    ordering = ["id"]
+    paginate_by = 10
+
+    def get_queryset(self):
+        # items = Features.objects.all().select_related("pricing")
+
+        # for i in items:
+        #     print(i.pricing)
+
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        data =  super().get_context_data(**kwargs)
+        return data
 
 class PricingCreate(generic.CreateView, PricingUtils):
     # queryset
